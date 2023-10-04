@@ -5,6 +5,23 @@ import { useState } from 'react';
 
 const App = () => {
   const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']);
+  const [player, setPlayer] = useState('X');
+
+  const chooseSquare = (square) => {
+    setBoard(
+      board.map((value, index) => {
+        if (index === square && value === '') {
+          return player;
+        }
+        return value;
+      }),
+    );
+    if (player === 'X') {
+      setPlayer('O');
+    } else {
+      setPlayer('X');
+    }
+  };
 
   return (
     <div className="App">
@@ -13,19 +30,19 @@ const App = () => {
           <Square
             value={board[0]}
             chooseSquare={() => {
-              alert(0);
+              chooseSquare(0);
             }}
           />
           <Square
             value={board[1]}
             chooseSquare={() => {
-              alert(1);
+              chooseSquare(1);
             }}
           />
           <Square
             value={board[2]}
             chooseSquare={() => {
-              alert(2);
+              chooseSquare(2);
             }}
           />
         </div>
@@ -34,19 +51,19 @@ const App = () => {
           <Square
             value={board[3]}
             chooseSquare={() => {
-              alert(3);
+              chooseSquare(3);
             }}
           />
           <Square
             value={board[4]}
             chooseSquare={() => {
-              alert(4);
+              chooseSquare(4);
             }}
           />
           <Square
             value={board[5]}
             chooseSquare={() => {
-              alert(5);
+              chooseSquare(5);
             }}
           />
         </div>
@@ -55,19 +72,19 @@ const App = () => {
           <Square
             value={board[6]}
             chooseSquare={() => {
-              alert(6);
+              chooseSquare(6);
             }}
           />
           <Square
             value={board[7]}
             chooseSquare={() => {
-              alert(7);
+              chooseSquare(7);
             }}
           />
           <Square
             value={board[8]}
             chooseSquare={() => {
-              alert(8);
+              chooseSquare(8);
             }}
           />
         </div>
