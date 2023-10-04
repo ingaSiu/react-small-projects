@@ -1,5 +1,6 @@
 import './App.css';
 
+import { Patterns } from './Patterns.js';
 import Square from './Components/Square';
 import { useState } from 'react';
 
