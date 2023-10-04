@@ -12,6 +12,7 @@ const App = () => {
 
   useEffect(() => {
     checkWin();
+    checkIfTie();
     if (player === 'X') {
       setPlayer('O');
     } else {
@@ -46,9 +47,21 @@ const App = () => {
         }
       });
       if (foundWinningPattern) {
-        setResult({ winner: player, state: 'won' });
+        setResult({ winner: player, state: 'Win' });
       }
     });
+  };
+
+  const checkIfTie = () => {
+    let filled = true;
+    board.forEach((square) => {
+      if (square === '') {
+        filled = false;
+      }
+    });
+    if (filled) {
+      setResult({ winner: 'No One', state: 'Tie' });
+    }
   };
 
   return (
