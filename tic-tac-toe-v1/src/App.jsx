@@ -23,6 +23,7 @@ const App = () => {
   useEffect(() => {
     if (result.state != 'none') {
       alert(`Game finished! Winning player ${result.winner}`);
+      restartGame();
     }
   }, [result]);
 
@@ -64,6 +65,10 @@ const App = () => {
     }
   };
 
+  const restartGame = () => {
+    setBoard(['', '', '', '', '', '', '', '', '']);
+    setPlayer('O');
+  };
   return (
     <div className="App">
       <div className="board">
