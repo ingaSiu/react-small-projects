@@ -7,3 +7,46 @@
   justify-content: center;
   align-items: center;
 }
+
+.circle {
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  border: 15px solid blueviolet;
+  box-sizing: border-box;
+}
+
+.cross {
+  height: 90px;
+  width: 90px;
+  position: relative;
+}
+.cross:before,
+.cross:after {
+  content: '';
+  position: absolute;
+  background-color: rosybrown;
+  left: 0; /* Adjust the left position */
+  right: 0; /* Adjust the right position */
+  top: 35%; /* Center vertically */
+  height: 30%; /* Set the height */
+}
+/* .cross:before {
+  left: 50%;
+  width: 30%;
+  margin-left: -15%;
+  height: 100%;
+}
+.cross:after {
+  top: 50%;
+  height: 30%;
+  margin-top: -15%;
+  width: 100%;
+} */
+.cross:before {
+  transform: rotate(-45deg); /* Adjust the rotation angle */
+}
+
+.cross:after {
+  transform: rotate(45deg); /* Adjust the rotation angle */
+}
