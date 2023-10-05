@@ -20,6 +20,7 @@ const App = () => {
       [0, 4, 8],
       [2, 4, 6],
     ];
+    const isBoardFull = cells.every((cell) => cell === 'circle' || cell === 'cross');
 
     winningCombos.forEach((array) => {
       let circleWins = array.every((cell) => cells[cell] === 'circle');
@@ -38,6 +39,11 @@ const App = () => {
         return;
       }
     });
+
+    if (isBoardFull && !winningMessage) {
+      setWinningMessage("It's a draw!"); // Set the message for a draw
+      return;
+    }
   };
 
   const handleRestart = () => {
