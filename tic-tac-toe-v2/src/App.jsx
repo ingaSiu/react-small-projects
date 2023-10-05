@@ -40,6 +40,12 @@ const App = () => {
     });
   };
 
+  const handleRestart = () => {
+    setCells(['', '', '', '', '', '', '', '', '']); // Reset cells to initial state
+    setGo('circle'); // Set the turn to the initial player
+    setWinningMessage(null); // Clear the winning message
+  };
+
   useEffect(() => {
     checkScore();
   }, [cells]);
@@ -61,6 +67,9 @@ const App = () => {
         ))}
       </div>
       <p>{winningMessage || message}</p>
+      <button className="button" onClick={handleRestart}>
+        Restart game
+      </button>
     </div>
   );
 };
