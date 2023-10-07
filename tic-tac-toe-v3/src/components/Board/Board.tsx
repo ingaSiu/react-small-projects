@@ -1,3 +1,5 @@
+import './Board.scss';
+
 type BoardProps = {
   board: Array<Array<string | null>>;
   handleClick: (row: number, col: number) => void;
