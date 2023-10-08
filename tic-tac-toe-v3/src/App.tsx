@@ -13,7 +13,9 @@ const App = () => {
   const [player, setPlayer] = useState<string>('X');
   const [winner, setWinner] = useState<string | null>(null);
 
-  const checkWinner = (board) => {};
+  const checkWinner = (board) => {
+    const lines = [];
+  };
 
   const handleOnClick = (row: number, col: number) => {
     if (board[row][col] || winner) {
