@@ -43,10 +43,9 @@ const checkWinner = (board: BoardArray): string | null => {
 };
 
 const App = () => {
-  const [board, setBoard] = useState<BoardArray>(
-    Array.from({ length: 3 }, () => Array.from({ length: 3 }, () => null)),
-  );
+  const initialBoard = Array.from({ length: 3 }, () => Array.from({ length: 3 }, () => null));
 
+  const [board, setBoard] = useState<BoardArray>(initialBoard);
   const [player, setPlayer] = useState<string>('X');
   const [winner, setWinner] = useState<string | null>(null);
   const [draw, setDraw] = useState<boolean>(false);
@@ -91,6 +90,12 @@ const App = () => {
     }
   };
 
+  const restartGame = () => {
+    setBoard(initialBoard);
+    setPlayer('X');
+    setWinner(null);
+    setDraw(false);
+  };
   return (
     <div className="game">
       <h1>Tic-Tac-Toe game</h1>
@@ -99,6 +104,9 @@ const App = () => {
       {winner && <p>{winner === 'X' ? 'Player wins!' : 'Computer wins!'}</p>}
 
       {draw && <p>It's a draw!</p>}
+      <button className="reset" onClick={() => restartGame()}>
+        Reset game
+      </button>
     </div>
   );
 };
