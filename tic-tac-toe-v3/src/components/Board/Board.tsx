@@ -11,7 +11,11 @@ const Board = ({ board, handleClick }: BoardProps) => {
       {board.map((row, rowIndex) => (
         <div key={rowIndex} className="boardRow">
           {row.map((cell, cellIndex) => (
-            <button key={cellIndex} className="cell" onClick={() => handleClick(rowIndex, cellIndex)}>
+            <button
+              key={cellIndex}
+              className={`cell ${cell ? `cell_${cell.toLowerCase()}` : ''}  `}
+              onClick={() => handleClick(rowIndex, cellIndex)}
+            >
               {cell}
             </button>
           ))}

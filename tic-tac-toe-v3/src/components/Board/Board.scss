@@ -25,5 +25,23 @@
         cursor: pointer;
       }
     }
+    .cell_x {
+      background: #bb76ff;
+      color: white;
+      &:hover {
+        color: indigo;
+        background-color: rgb(139, 170, 228);
+        cursor: pointer;
+      }
+    }
+    .cell_o {
+      background: lavender;
+      color: palegreen;
+      &:hover {
+        color: olive;
+        background-color: chocolate;
+        cursor: pointer;
+      }
+    }
   }
 }
