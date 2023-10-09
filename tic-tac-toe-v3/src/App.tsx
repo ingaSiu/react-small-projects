@@ -49,6 +49,7 @@ const App = () => {
 
   const [player, setPlayer] = useState<string>('X');
   const [winner, setWinner] = useState<string | null>(null);
+  const [draw, setDraw] = useState<boolean>(false);
 
   // function returns string
   // type cell = 'x' | 'o';
@@ -68,6 +69,15 @@ const App = () => {
     setWinner(newWinner);
     setPlayer('X');
 
+    // No winner
+
+    const hasNullValue = updatedPlayerBoard.some((row) => row.some((cell) => cell === null));
+
+    if (!winner && !hasNullValue) {
+      setDraw(true);
+      return;
+    }
+
     // Computer's move
     if (!newWinner) {
       const [computerRow, computerCol] = makeComputerMove(updatedPlayerBoard);
@@ -85,6 +95,10 @@ const App = () => {
     <div className="game">
       <h1>Tic-Tac-Toe game</h1>
       <Board board={board} handleClick={handleOnClick} />
+
+      {winner && <p>{winner === 'X' ? 'Player wins!' : 'Computer wins!'}</p>}
+
+      {draw && <p>It's a draw!</p>}
     </div>
   );
 };
