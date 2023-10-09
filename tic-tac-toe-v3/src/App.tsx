@@ -74,8 +74,10 @@ const App = () => {
       const updatedComputerBoard = updatedPlayerBoard.map((newRow, rowIndex) =>
         newRow.map((cell, cellIndex) => (rowIndex === computerRow && cellIndex === computerCol ? 'O' : cell)),
       );
-      setBoard(updatedComputerBoard);
-      setWinner(checkWinner(updatedComputerBoard));
+      setTimeout(() => {
+        setBoard(updatedComputerBoard);
+        setWinner(checkWinner(updatedComputerBoard));
+      }, 200);
     }
   };
 
