@@ -1,6 +1,6 @@
 import { BoardArray } from '../App';
 
-const getCleverMoves = (
+export const getCleverMoves = (
   board: BoardArray,
   player: string,
   checkWinner: (board: Array<Array<string | null>>) => string | null,
@@ -64,5 +64,3 @@ const getCleverMoves = (
 
   return emptyCells[randomCell];
 };
-
-export default getCleverMoves;
