@@ -2,6 +2,7 @@ import './App.scss';
 
 import Board from './components/Board/Board';
 import checkWinner from './utils/checkWinner';
+import { getCleverMoves } from './utils/getCleverMoves';
 import { useState } from 'react';
 
 export type BoardArray = Array<Array<string | null>>;
@@ -43,12 +44,17 @@ const App = () => {
 
     // Computer's move
     if (!newWinner) {
-      const updatedComputerBoard = updatedPlayerBoard.map((newRow, rowIndex) =>
-        newRow.map((cell, cellIndex) => (rowIndex === computerRow && cellIndex === computerCol ? 'O' : cell)),
-      );
+      const nextPlayer = player === 'X' ? 'O' : 'X';
+
+      const bestMove = getCleverMoves(updatedPlayerBoard, nextPlayer, checkWinner);
+
       setTimeout(() => {
-        setBoard(updatedComputerBoard);
-        setWinner(checkWinner(updatedComputerBoard));
+        const aiBoard = updatedPlayerBoard.map((row, rowIndex) =>
+          row.map((col, colIndex) => (rowIndex === bestMove?.[0] && colIndex === bestMove[1] ? nextPlayer : col)),
+        );
+
+        setBoard(aiBoard);
+        setWinner(checkWinner(aiBoard));
       }, 200);
     }
   };
