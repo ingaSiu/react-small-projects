@@ -2,7 +2,6 @@ import './App.scss';
 
 import Board from './components/Board/Board';
 import checkWinner from './utils/checkWinner';
-
 import { useState } from 'react';
 
 export type BoardArray = Array<Array<string | null>>;
