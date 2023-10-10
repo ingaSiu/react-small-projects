@@ -45,6 +45,18 @@ const getCleverMoves = (board, player, checkWinner) => {
   }
 
   // random move
+  const emptyCells: Array<[number, number]> = [];
+
+  board.forEach((row, rowIndex) =>
+    row.forEach((col, colIndex) => {
+      if (!board[rowIndex][colIndex]) {
+        emptyCells.push([rowIndex, colIndex]);
+      }
+    }),
+  );
+  const randomCell = Math.floor(Math.random() * emptyCells.length);
+
+  return emptyCells[randomCell];
 };
 
 export default getCleverMoves;
