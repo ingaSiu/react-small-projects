@@ -1,0 +1,47 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  .boardRow {
+    display: flex;
+    .cell {
+      width: 100px;
+      height: 100px;
+      border-radius: 0;
+      border: none;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 50px;
+      font-weight: 700;
+      background-color: steelblue;
+      outline: none;
+      margin-right: 10px;
+      &:hover {
+        color: darkmagenta;
+        background-color: cornflowerblue;
+        cursor: pointer;
+      }
+    }
+    .cell_x {
+      background: #bb76ff;
+      color: white;
+      &:hover {
+        color: indigo;
+        background-color: rgb(139, 170, 228);
+        cursor: pointer;
+      }
+    }
+    .cell_o {
+      background: lavender;
+      color: palegreen;
+      &:hover {
+        color: olive;
+        background-color: chocolate;
+        cursor: pointer;
+      }
+    }
+  }
+}
