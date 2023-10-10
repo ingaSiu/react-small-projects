@@ -1,4 +1,10 @@
-const getCleverMoves = (board, player, checkWinner) => {
+import { BoardArray } from '../App';
+
+const getCleverMoves = (
+  board: BoardArray,
+  player: string,
+  checkWinner: (board: Array<Array<string | null>>) => string | null,
+): [number, number] => {
   const cleverMoves: Array<[number, number]> = [];
 
   // check winning moves
@@ -8,7 +14,7 @@ const getCleverMoves = (board, player, checkWinner) => {
         const clonedBoard = board.map((r) => [...r]);
         clonedBoard[rowIndex][colIndex] = player;
         if (checkWinner(clonedBoard) === player) {
-          cleverMoves.unshift([rowIndex][colIndex]);
+          cleverMoves.unshift([rowIndex, colIndex]);
         }
       }
     }),
@@ -26,7 +32,7 @@ const getCleverMoves = (board, player, checkWinner) => {
         clonedBoard[rowIndex][colIndex] = opponent;
 
         if (checkWinner(clonedBoard) === opponent) {
-          cleverMoves.push([rowIndex][colIndex]);
+          cleverMoves.push([rowIndex, colIndex]);
           return true;
         }
         return false;
