@@ -40,6 +40,10 @@ const getCleverMoves = (board, player, checkWinner) => {
 
   // choose the center cell
 
+  if (!board[1][1]) {
+    return [1, 1];
+  }
+
   // random move
 };
 
