@@ -13,7 +13,11 @@ body {
 .boardRow {
   display: flex;
 }
-
+.status {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
 .square {
   font-size: xxx-large;
   font-weight: 700;
