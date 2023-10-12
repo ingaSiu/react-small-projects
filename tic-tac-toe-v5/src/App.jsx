@@ -1,6 +1,8 @@
 import './App.css';
+
+import Square from './components/Square/Square';
 const App = () => {
-  return <div>Hello</div>;
+  return <Square />;
 };
 
 export default App;
