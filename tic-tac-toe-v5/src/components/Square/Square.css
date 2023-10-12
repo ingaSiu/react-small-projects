@@ -5,6 +5,8 @@
   border: none;
   background-color: thistle;
   color: cadetblue;
+  width: 100px;
+  height: 100px;
 }
 
 .square:hover {
