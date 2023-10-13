@@ -3,6 +3,28 @@ import './App.css';
 
 import { useState } from 'react';
 
+const calculateWinner = (squares) => {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+};
+
 const Square = ({ value, onSquareClick }) => {
   return (
     <button className="square" onClick={onSquareClick}>
@@ -11,10 +33,7 @@ const Square = ({ value, onSquareClick }) => {
   );
 };
 
-const Board = () => {
-  const [xIsNext, setXIsNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
-
+const Board = ({ xIsNext, squares, onPlay }) => {
   const handleClick = (i) => {
     if (squares[i] || calculateWinner(squares)) {
       return;
@@ -28,31 +47,9 @@ const Board = () => {
       nextSquares[i] = 'O';
     }
 
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
   };
 
-  const calculateWinner = (squares) => {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
-      }
-    }
-    return null;
-  };
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
@@ -83,5 +80,23 @@ const Board = () => {
   );
 };
 
-export default Board;
+const Game = () => {
+  const [xIsNext, setXIsNext] = useState(true);
+  const [history, setHistory] = useState(Array(9).fill(null));
+  const currentSquares = history[history.length - 1];
+
+  const handlePlay = (nextSquares) => {};
+
+  return (
+    <div className="game">
+      <div className="gameBoard">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div className="gameInfo">
+        <ol>{/*TODO*/}</ol>
+      </div>
+    </div>
+  );
+};
+export default Game;
 
