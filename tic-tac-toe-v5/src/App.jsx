@@ -82,10 +82,13 @@ const Board = ({ xIsNext, squares, onPlay }) => {
 
 const Game = () => {
   const [xIsNext, setXIsNext] = useState(true);
-  const [history, setHistory] = useState(Array(9).fill(null));
+  const [history, setHistory] = useState([Array(9).fill(null)]);
   const currentSquares = history[history.length - 1];
 
-  const handlePlay = (nextSquares) => {};
+  const handlePlay = (nextSquares) => {
+    setHistory([...history, nextSquares]);
+    setXIsNext(!xIsNext);
+  };
 
   return (
     <div className="game">
