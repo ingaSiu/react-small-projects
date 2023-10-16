@@ -22,10 +22,14 @@ const Board = ({ xIsNext, squares, onPlay }) => {
     onPlay(nextSquares);
   };
 
+  const isBoardFull = squares.every((square) => square !== null);
+
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
     status = 'Winner : ' + winner + '!';
+  } else if (isBoardFull) {
+    status = 'Draw! The game is a tie!';
   } else {
     status = 'Next player : ' + (xIsNext ? 'X' : 'O');
   }
