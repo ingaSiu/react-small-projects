@@ -1,16 +1,9 @@
 /* eslint-disable react/prop-types */
 import './App.css';
 
+import Square from './components/Square/Square';
 import { calculateWinner } from './utils/calculateWinner';
 import { useState } from 'react';
-
-const Square = ({ value, onSquareClick }) => {
-  return (
-    <button className="square" onClick={onSquareClick}>
-      {value}
-    </button>
-  );
-};
 
 const Board = ({ xIsNext, squares, onPlay }) => {
   const handleClick = (i) => {
