@@ -6,9 +6,6 @@ import Square from '../Square/Square';
 import { calculateWinner } from '../../utils/calculateWinner';
 
 const Board = ({ xIsNext, squares, onPlay }) => {
-  const renderSquare = (i) => {
-    return <Square value={squares[i]} onSquareClick={() => handleClick(i)} />;
-  };
   const handleClick = (i) => {
     if (squares[i] || calculateWinner(squares)) {
       return;
@@ -39,9 +36,14 @@ const Board = ({ xIsNext, squares, onPlay }) => {
   return (
     <>
       <div className="status">{status}</div>
-      {boardRows.map((row) => (
-        <div key={row} className="boardRow">
-          {boardRows.map((col) => renderSquare(row * boardSize + col))}
+      {boardRows.map((row, rowIndex) => (
+        <div key={rowIndex} className="boardRow">
+          {boardRows.map((col, colIndex) => {
+            const squareIndex = rowIndex * boardSize + colIndex;
+            return (
+              <Square key={squareIndex} value={squares[squareIndex]} onSquareClick={() => handleClick(squareIndex)} />
+            );
+          })}
         </div>
       ))}
     </>
