@@ -5,7 +5,8 @@ import Board from './components/Board/Board';
 import { useState } from 'react';
 
 const Game = () => {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const initialHistory = [Array(9).fill(null)];
+  const [history, setHistory] = useState(initialHistory);
   const [currentMove, setCurrentMove] = useState(0);
 
   const xIsNext = currentMove % 2 === 0;
@@ -44,14 +45,26 @@ const Game = () => {
       </li>
     );
   });
+
+  const handleReset = () => {
+    setHistory(initialHistory);
+    setCurrentMove(0);
+  };
+
   return (
     <div className="game">
-      <div className="gameBoard">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      <div className="gameContainer">
+        <div className="gameBoard">
+          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        </div>
+        <div className="gameInfo">
+          <ol>{moves}</ol>
+        </div>
       </div>
-      <div className="gameInfo">
-        <ol>{moves}</ol>
-      </div>
+
+      <button className="resetBtn" onClick={handleReset}>
+        Reset game
+      </button>
     </div>
   );
 };
