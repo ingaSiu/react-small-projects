@@ -84,10 +84,22 @@ const Game = () => {
   const [xIsNext, setXIsNext] = useState(true);
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
-  const currentSquares = history[history.length - 1];
+
+  // modify the game component to render the currently selected move,
+  //  instead of always rendering the final move
+  const currentSquares = history[currentMove];
+
+  // If you “go back in time” and then make a new move from that point, you only want to keep
+  // the history up to that point. Instead of adding nextSquares after all items (... spread syntax)
+  //  in history, you’ll add it after all items in history.slice(0, currentMove + 1) so that you’re
+  //  only keeping that portion of the old history.
+
+  // Each time a move is made, you need to update currentMove to point to the latest history entry.
 
   const handlePlay = (nextSquares) => {
-    setHistory([...history, nextSquares]);
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
     setXIsNext(!xIsNext);
   };
 
