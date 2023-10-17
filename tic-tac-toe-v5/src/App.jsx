@@ -76,7 +76,9 @@ const Game = () => {
 
         <div className="gameInfo">
           <div>
-            <button onClick={toggleSort}>{isAscending ? 'Sort Descending' : 'Sort Ascending'}</button>
+            <button className="sortBtn" onClick={toggleSort}>
+              {isAscending ? 'Sort Descending ↓' : 'Sort Ascending ↑'}
+            </button>
           </div>
           <ol>{isAscending ? moves : moves.reverse()}</ol>
         </div>

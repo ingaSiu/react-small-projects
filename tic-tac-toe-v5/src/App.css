@@ -54,3 +54,8 @@ body {
   font-size: 18px;
   margin-top: 16px;
 }
+
+.sortBtn {
+  margin-bottom: 16px;
+  padding: 8px 6px;
+}
