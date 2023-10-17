@@ -8,6 +8,7 @@ const Game = () => {
   const initialHistory = [Array(9).fill(null)];
   const [history, setHistory] = useState(initialHistory);
   const [currentMove, setCurrentMove] = useState(0);
+  const [isAscending, setIsAscending] = useState(true);
 
   const xIsNext = currentMove % 2 === 0;
 
@@ -32,7 +33,11 @@ const Game = () => {
     setCurrentMove(nextMove);
   };
 
-  const moves = history.map((squares, move) => {
+  const toggleSort = () => {
+    setIsAscending(!isAscending);
+  };
+
+  const moves = [...history].map((squares, move) => {
     let description;
     if (move === currentMove) {
       description = 'You are at move #' + move;
@@ -41,6 +46,7 @@ const Game = () => {
     } else {
       description = 'Go to game start';
     }
+
     return (
       <li key={move}>
         {move === currentMove ? (
@@ -69,7 +75,10 @@ const Game = () => {
         </div>
 
         <div className="gameInfo">
-          <ol>{moves}</ol>
+          <div>
+            <button onClick={toggleSort}>{isAscending ? 'Sort Descending' : 'Sort Ascending'}</button>
+          </div>
+          <ol>{isAscending ? moves : moves.reverse()}</ol>
         </div>
       </div>
     </div>
