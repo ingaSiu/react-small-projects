@@ -49,3 +49,8 @@ body {
   font-size: 24px;
   margin-top: 24px;
 }
+.currentMove {
+  padding: 10px 8px;
+  font-size: 18px;
+  margin-top: 16px;
+}
