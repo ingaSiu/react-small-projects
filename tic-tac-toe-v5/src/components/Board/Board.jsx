@@ -24,10 +24,12 @@ const Board = ({ xIsNext, squares, onPlay }) => {
 
   const isBoardFull = squares.every((square) => square !== null);
 
-  const winner = calculateWinner(squares);
+  const winnerInfo = calculateWinner(squares);
+  const winningLine = winnerInfo ? winnerInfo.winningLine : null;
+
   let status;
-  if (winner) {
-    status = 'Winner : ' + winner + '!';
+  if (winnerInfo) {
+    status = 'Winner : ' + winnerInfo.winner + '!';
   } else if (isBoardFull) {
     status = 'Draw! The game is a tie!';
   } else {
@@ -44,8 +46,14 @@ const Board = ({ xIsNext, squares, onPlay }) => {
         <div key={rowIndex} className="boardRow">
           {boardRows.map((col, colIndex) => {
             const squareIndex = rowIndex * boardSize + colIndex;
+            const isWinningSquare = winningLine && winningLine.includes(squareIndex);
             return (
-              <Square key={squareIndex} value={squares[squareIndex]} onSquareClick={() => handleClick(squareIndex)} />
+              <Square
+                key={squareIndex}
+                value={squares[squareIndex]}
+                onSquareClick={() => handleClick(squareIndex)}
+                isWinning={isWinningSquare}
+              />
             );
           })}
         </div>
