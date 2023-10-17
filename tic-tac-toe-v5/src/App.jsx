@@ -56,15 +56,16 @@ const Game = () => {
       <div className="gameContainer">
         <div className="gameBoard">
           <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+
+          <button className="resetBtn" onClick={handleReset}>
+            Reset game
+          </button>
         </div>
+
         <div className="gameInfo">
           <ol>{moves}</ol>
         </div>
       </div>
-
-      <button className="resetBtn" onClick={handleReset}>
-        Reset game
-      </button>
     </div>
   );
 };

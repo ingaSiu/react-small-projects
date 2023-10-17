@@ -21,6 +21,12 @@ body {
   display: flex;
   gap: 50px;
 }
+.gameBoard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .gameInfo {
   align-self: center;
 }
@@ -41,4 +47,5 @@ body {
 .resetBtn {
   padding: 10px 8px;
   font-size: 24px;
+  margin-top: 24px;
 }
