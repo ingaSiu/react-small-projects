@@ -1,7 +1,12 @@
 import './App.css';
 
 const App = () => {
-  return <h1>Hello</h1>;
+  return (
+    <div className="container">
+      <input placeholder="Message..." />
+      <button>Send Message</button>
+    </div>
+  );
 };
 
 export default App;
