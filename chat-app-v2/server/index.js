@@ -50,6 +50,6 @@ io.on('connection', (socket) => {
   // everyone else will get a message that we are typing
 
   socket.on('activity', (name) => {
-    socket.broadcast.emit('activity, name');
+    socket.broadcast.emit('activity', name);
   });
 });
