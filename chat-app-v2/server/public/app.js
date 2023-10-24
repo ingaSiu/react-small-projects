@@ -1,14 +1,16 @@
 const socket = io('ws://localhost:3500');
 
+const activity = document.querySelector('.activity');
+const msgInput = document.querySelector('input');
+
 const sendMessage = (event) => {
   event.preventDefault();
-  const input = document.querySelector('input');
 
-  if (input.value) {
-    socket.emit('message', input.value);
-    input.value = '';
+  if (msgInput.value) {
+    socket.emit('message', msgInput.value);
+    msgInput.value = '';
   }
-  input.focus();
+  msgInput.focus();
 };
 
 document.querySelector('form').addEventListener('submit', sendMessage);
@@ -19,4 +21,8 @@ socket.on('message', (data) => {
   const listItem = document.createElement('li');
   listItem.textContent = data;
   document.querySelector('ul').appendChild(listItem);
+});
+
+msgInput.addEventListener('keypress', () => {
+  socket.emit('activity', socket.id.substring(0, 5));
 });
