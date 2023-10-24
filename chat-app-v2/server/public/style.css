@@ -26,3 +26,14 @@ button {
   border-radius: 10px;
   padding: 10px;
 }
+.activity {
+  width: 100%;
+  min-height: 2.65rem;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 0.75rem 0.25rem;
+}
+
+.activity {
+  font-style: italic;
+}
