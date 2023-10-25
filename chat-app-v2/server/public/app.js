@@ -42,9 +42,25 @@ msgInput.addEventListener('keypress', () => {
 // Listen for messages
 socket.on('message', (data) => {
   activity.textContent = '';
+  const { name, text, time } = data;
   const listItem = document.createElement('li');
-  listItem.textContent = data;
-  document.querySelector('ul').appendChild(listItem);
+  listItem.classList = 'post';
+  if (name === nameInput.value) listItem.className = 'post post--left';
+  if (name !== nameInput.value && name !== 'Admin') listItem.className = 'post post--right';
+  if (name !== 'Admin') {
+    listItem.innerHTML = `<div class= "post__header ${
+      name === nameInput.value ? 'post__header--user' : 'post__header--reply'
+    }">
+    <span class="post__header--name">${name}</span>
+    <span class="post__header--time">${time}</span>
+    </div>
+    <div class="post__text">${text}</div>
+    `;
+  } else {
+    listItem.innerHTML = `<div class='post__text'>${text}</div>`;
+  }
+  document.querySelector('.chat-display').appendChild(listItem);
+  chatDisplay.scrollTop = chatDisplay.scrollHeight;
 });
 
 let activityTimer;
@@ -57,3 +73,37 @@ socket.on('activity', (name) => {
     activity.textContent = '';
   }, 3000);
 });
+
+socket.on('userList', ({ users }) => {
+  showUsers(users);
+});
+socket.on('roomList', ({ rooms }) => {
+  showRooms(rooms);
+});
+
+const showUsers = (users) => {
+  usersList.textContent = '';
+  if (users) {
+    usersList.innerHTML = `<em>Users in ${chatRoom.value}: </em>`;
+
+    users.foreach((user, i) => {
+      usersList.textContent += ` ${user.name}`;
+      if (users.length > 1 && i !== users.length - 1) {
+        usersList.textContent += ',';
+      }
+    });
+  }
+};
+const showRooms = (rooms) => {
+  roomList.textContent = '';
+  if (rooms) {
+    roomList.innerHTML = '<em>Active rooms:</em>';
+
+    rooms.foreach((room, i) => {
+      roomList.textContent += ` ${room}`;
+      if (rooms.length > 1 && i !== rooms.length - 1) {
+        roomList.textContent += ',';
+      }
+    });
+  }
+};
