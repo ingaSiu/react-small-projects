@@ -14,7 +14,7 @@ const sendMessage = (event) => {
 
   if (nameInput.value && msgInput.value && chatRoom.value) {
     socket.emit('message', {
-      name: nameInput,
+      name: nameInput.value,
       text: msgInput.value,
     });
     msgInput.value = '';
@@ -86,7 +86,7 @@ const showUsers = (users) => {
   if (users) {
     usersList.innerHTML = `<em>Users in ${chatRoom.value}: </em>`;
 
-    users.foreach((user, i) => {
+    users.forEach((user, i) => {
       usersList.textContent += ` ${user.name}`;
       if (users.length > 1 && i !== users.length - 1) {
         usersList.textContent += ',';
@@ -99,7 +99,7 @@ const showRooms = (rooms) => {
   if (rooms) {
     roomList.innerHTML = '<em>Active rooms:</em>';
 
-    rooms.foreach((room, i) => {
+    rooms.forEach((room, i) => {
       roomList.textContent += ` ${room}`;
       if (rooms.length > 1 && i !== rooms.length - 1) {
         roomList.textContent += ',';
