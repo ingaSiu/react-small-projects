@@ -8,6 +8,8 @@ const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3500;
 
+const ADMIN = 'Admin';
+
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -15,6 +17,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 const expressServer = app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+
+// state
+const UsersState = {
+  users: [],
+  setUsers: function (newUsersArray) {
+    this.users = newUsersArray;
+  },
+};
 
 const io = new Server(expressServer, {
   cors: {
@@ -28,7 +38,7 @@ io.on('connection', (socket) => {
   // Upon connection - only to usser
   // .emit goes directly to user
 
-  socket.emit('message', 'Welocome to chat app!');
+  socket.emit('message', buildMessage(ADMIN, 'Welcome to Chat app!'));
 
   // Upon connection - to all others
   // .broadcast goes to everyone else except the user
@@ -53,3 +63,44 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('activity', name);
   });
 });
+
+const buildMessage = (name, text) => {
+  return {
+    name,
+    text,
+    time: new Intl.DateTimeFormat('default', {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    }).format(new Date()),
+  };
+};
+
+// User functions
+
+// adding user
+const activateUser = (id, name, room) => {
+  const user = { id, name, room };
+  UsersState.setUsers([...UsersState.users.filter((user) => user.id != id), user]);
+  return user;
+};
+
+// removing user
+const userLeavesApp = (id) => {
+  UsersState.setUsers(UsersState.users.filter((user) => user.id != id));
+};
+
+// find the user we are looking for
+
+const getUser = (id) => {
+  return UsersState.users.find((user) => user.id === id);
+};
+
+const getUsersInRoom = (room) => {
+  return UsersState.users.filter((user) => user.room === room);
+};
+
+// this will return all active rooms with no duplicates
+const getAllActiveRooms = () => {
+  return Array.from(new Set(UsersState.users.map((user) => user.room)));
+};
