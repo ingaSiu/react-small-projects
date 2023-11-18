@@ -1,16 +1,9 @@
 import './App.css';
 
+import { ACTIONS } from './utils/const';
 import DigitButton from './components/DigitButton';
 import OperationButton from './components/OperationButton';
 import { useReducer } from 'react';
-
-export const ACTIONS = {
-  ADD_DIGIT: 'add-digit',
-  CHOOSE_OPERATION: 'choose-operation',
-  CLEAR: 'clear',
-  DELETE_DIGIT: 'delete-digit',
-  EVALUATE: 'evaluate',
-};
 
 const reducer = (state, { type, payload }) => {
   switch (type) {
@@ -26,6 +19,13 @@ const reducer = (state, { type, payload }) => {
     case ACTIONS.CHOOSE_OPERATION:
       if (state.currentOperand == null && state.previousOperand == null) {
         return state;
+      }
+
+      if (state.currentOperand == null) {
+        return {
+          ...state,
+          operation: payload.operation,
+        };
       }
       if (state.previousOperand == null) {
         return {

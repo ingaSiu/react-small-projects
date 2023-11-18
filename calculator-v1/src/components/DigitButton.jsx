@@ -1,4 +1,4 @@
-import { ACTIONS } from '../App';
+import { ACTIONS } from '../utils/const';
 
 // eslint-disable-next-line react/prop-types
 const DigitButton = ({ dispatch, digit }) => {

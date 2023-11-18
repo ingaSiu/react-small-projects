@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { ACTIONS } from '../App';
+import { ACTIONS } from '../utils/const';
 
 const OperationButton = ({ dispatch, operation }) => {
   return (
