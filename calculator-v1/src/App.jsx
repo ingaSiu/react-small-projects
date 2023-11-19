@@ -21,7 +21,8 @@ const reducer = (state, { type, payload }) => {
       if (payload.digit === '.' && state.currentOperand.includes('.')) {
         return state;
       }
-      return { ...state, currentOperand: `${state.currentOperand || ''} ${payload.digit}` };
+
+      return { ...state, currentOperand: `${state.currentOperand || ''}${payload.digit}` };
 
     case ACTIONS.CHOOSE_OPERATION:
       if (state.currentOperand == null && state.previousOperand == null) {
