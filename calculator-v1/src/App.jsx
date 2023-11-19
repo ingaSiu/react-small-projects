@@ -18,6 +18,12 @@ const reducer = (state, { type, payload }) => {
       if (payload.digit === '0' && state.currentOperand === '0') {
         return state;
       }
+      if (payload.digit === '.' && state.currentOperand == null) {
+        return {
+          ...state,
+          currentOperand: `0${payload.digit}`,
+        };
+      }
       if (payload.digit === '.' && state.currentOperand.includes('.')) {
         return state;
       }
