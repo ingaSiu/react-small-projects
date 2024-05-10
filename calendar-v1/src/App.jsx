@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 
 import CalendarHeader from './components/CalendarHeader';
 import Day from './components/Day';
+import DeleteEventModal from './components/DeleteEventModal';
 import NewEventModal from './components/NewEventModal';
 
 const App = () => {
@@ -14,7 +16,7 @@ const App = () => {
   );
 
   const eventForDate = (date) => {
-    events.find((e) => e.date === date);
+    return events.find((e) => e.date === date);
   };
 
   useEffect(() => {
@@ -106,6 +108,17 @@ const App = () => {
           onClose={() => setClicked(null)}
           onSave={(title) => {
             setEvents([...events, { title, date: clicked }]);
+            setClicked(null);
+          }}
+        />
+      )}
+
+      {clicked && eventForDate(clicked) && (
+        <DeleteEventModal
+          eventText={eventForDate(clicked).title}
+          onClose={() => setClicked(null)}
+          onDelete={() => {
+            setEvents(events.filter((e) => e.date !== clicked));
             setClicked(null);
           }}
         />
