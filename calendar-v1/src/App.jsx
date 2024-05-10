@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import CalendarHeader from './components/CalendarHeader';
 import Day from './components/Day';
+import NewEventModal from './components/NewEventModal';
 
 const App = () => {
   const [nav, setNav] = useState(0);
@@ -72,32 +73,44 @@ const App = () => {
   }, [events, nav]);
 
   return (
-    <div id="container">
-      <CalendarHeader />
-      <div id="weekdays">
-        <div>Sunday</div>
-        <div>Monday</div>
-        <div>Tuesday</div>
-        <div>Wednesday</div>
-        <div>Thursday</div>
-        <div>Friday</div>
-        <div>Saturday</div>
+    <>
+      <div id="container">
+        <CalendarHeader />
+        <div id="weekdays">
+          <div>Sunday</div>
+          <div>Monday</div>
+          <div>Tuesday</div>
+          <div>Wednesday</div>
+          <div>Thursday</div>
+          <div>Friday</div>
+          <div>Saturday</div>
+        </div>
+
+        <div id="calendar">
+          {days.map((day, index) => (
+            <Day
+              key={index}
+              day={day}
+              onClick={() => {
+                if (day.value !== 'padding') {
+                  setClicked(day.date);
+                }
+              }}
+            />
+          ))}
+        </div>
       </div>
 
-      <div id="calendar">
-        {days.map((day, index) => (
-          <Day
-            key={index}
-            day={day}
-            onClick={() => {
-              if (day.value !== 'padding') {
-                setClicked(day.date);
-              }
-            }}
-          />
-        ))}
-      </div>
-    </div>
+      {clicked && !eventForDate(clicked) && (
+        <NewEventModal
+          onClose={() => setClicked(null)}
+          onSave={(title) => {
+            setEvents([...events, { title, date: clicked }]);
+            setClicked(null);
+          }}
+        />
+      )}
+    </>
   );
 };
 
