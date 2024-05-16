@@ -1,7 +1,7 @@
 import { BoardArray } from '../App';
 
 export const getCleverMoves = (
-  board: BoardArray,
+  board: Array<Array<string | null>>,
   player: string,
   checkWinner: (board: Array<Array<string | null>>) => string | null,
 ): [number, number] => {
