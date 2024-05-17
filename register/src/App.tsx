@@ -1,8 +1,15 @@
-import './App.css';
-const App = () => {
+import styles from './App.module.scss';
+
+type AppProps = {
+  userName: string;
+};
+
+const App = ({ userName }: AppProps) => {
   return (
     <>
-      <div>hello</div>
+      <div className={styles.container}>
+        Hello <span>{userName}</span>{' '}
+      </div>
     </>
   );
 };
