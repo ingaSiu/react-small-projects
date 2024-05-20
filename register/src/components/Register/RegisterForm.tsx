@@ -27,7 +27,7 @@ const RegisterForm = () => {
           <input type="password" {...register('password', { required: true })} />
         </div>
         <div>
-          <label>Reapeat password</label>
+          <label>Confirm password</label>
           <input type="password" />
         </div>
 
