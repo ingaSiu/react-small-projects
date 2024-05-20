@@ -1,3 +1,4 @@
+import RegisterPage from './components/Register/RegisterPage';
 import styles from './App.module.scss';
 
 type AppProps = {
@@ -10,6 +11,7 @@ const App = ({ userName }: AppProps) => {
       <div className={styles.container}>
         Hello <span>{userName}</span>{' '}
       </div>
+      <RegisterPage />
     </>
   );
 };
