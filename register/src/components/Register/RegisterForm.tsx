@@ -1,3 +1,4 @@
+import { RegistrationProps } from '../../types/register';
 import { useForm } from 'react-hook-form';
 
 const RegisterForm = () => {
@@ -5,9 +6,9 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<RegistrationProps>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: RegistrationProps) => {
     console.log(data);
   };
   return (
