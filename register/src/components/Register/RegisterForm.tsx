@@ -30,22 +30,22 @@ const RegisterForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="userName">User Name</label>
-          <input type="text" {...register('userName', { required: true })} />
+          <input type="text" {...register('userName')} />
           {errors.userName && <p>{errors.userName.message}</p>}
         </div>
         <div>
           <label htmlFor="email">User Email</label>
-          <input type="email" {...register('email', { required: true, pattern: /^\S+@\S+$/i })} />
+          <input type="email" {...register('email')} />
           {errors.email && <p>{errors.email.message}</p>}
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input type="password" {...register('password', { required: true })} />
+          <input type="password" {...register('password')} />
           {errors.password && <p>{errors.password.message}</p>}
         </div>
         <div>
           <label>Confirm password</label>
-          <input type="password" {...register('confirmPassword', { required: true })} />
+          <input type="password" {...register('confirmPassword')} />
           {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
         </div>
 
