@@ -2,6 +2,7 @@ import * as yup from 'yup';
 
 import { EMAIL_REGX } from '../../utils/regex';
 import { RegistrationProps } from '../../types/register';
+import styles from './RegisterForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -28,28 +29,28 @@ const RegisterForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className={styles.inputWrapper}>
           <label htmlFor="userName">User Name</label>
           <input type="text" {...register('userName')} />
-          {errors.userName && <p>{errors.userName.message}</p>}
+          {errors.userName && <p className={styles.errorMsg}>{errors.userName.message}</p>}
         </div>
-        <div>
+        <div className={styles.inputWrapper}>
           <label htmlFor="email">User Email</label>
           <input type="email" {...register('email')} />
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && <p className={styles.errorMsg}>{errors.email.message}</p>}
         </div>
-        <div>
+        <div className={styles.inputWrapper}>
           <label htmlFor="password">Password</label>
           <input type="password" {...register('password')} />
-          {errors.password && <p>{errors.password.message}</p>}
+          {errors.password && <p className={styles.errorMsg}>{errors.password.message}</p>}
         </div>
-        <div>
+        <div className={styles.inputWrapper}>
           <label>Confirm password</label>
           <input type="password" {...register('confirmPassword')} />
-          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+          {errors.confirmPassword && <p className={styles.errorMsg}>{errors.confirmPassword.message}</p>}
         </div>
 
-        <button>Register</button>
+        <button className={styles.registerBtn}>Register</button>
       </form>
     </>
   );

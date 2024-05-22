@@ -1,0 +1,26 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: large;
+  }
+
+  input {
+    padding: 4px 6px;
+    width: 50%;
+  }
+}
+
+.errorMsg {
+  color: red;
+}
+
+.registerBtn {
+  padding: 8px 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: blueviolet;
+  }
+}
