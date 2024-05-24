@@ -1,16 +1,9 @@
-import RegisterPage from '../components/Register/RegisterPage';
-
-type AppProps = {
-  userName: string;
-};
-
-const Home = ({ userName }: AppProps) => {
+const Home = () => {
   return (
     <>
       <div>
-        Hello <span>{userName}</span>{' '}
+        Hello <span></span>{' '}
       </div>
-      <RegisterPage />
     </>
   );
 };
