@@ -1,9 +1,11 @@
 import * as yup from 'yup';
 
 import { EMAIL_REGX } from '../../utils/regex';
+import { HOME_PATH } from '../../routes/consts';
 import axios from 'axios';
 import styles from './RegisterForm.module.scss';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const schema = yup.object().shape({
@@ -19,6 +21,8 @@ const schema = yup.object().shape({
 type FormData = yup.InferType<typeof schema>;
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -38,6 +42,7 @@ const RegisterForm = () => {
         },
       );
       alert('Registration succesfull!');
+      navigate(HOME_PATH);
     } catch (err) {
       console.error(err);
       alert('Registration failed. Please try again.');
