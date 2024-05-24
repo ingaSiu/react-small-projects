@@ -1,17 +1,9 @@
-import RegisterPage from './components/Register/RegisterPage';
-import styles from './App.module.scss';
+import Routes from './routes/Routes';
 
-type AppProps = {
-  userName: string;
-};
-
-const App = ({ userName }: AppProps) => {
+const App = () => {
   return (
     <>
-      <div className={styles.container}>
-        Hello <span>{userName}</span>{' '}
-      </div>
-      <RegisterPage />
+      <Routes />
     </>
   );
 };
