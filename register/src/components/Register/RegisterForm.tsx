@@ -2,6 +2,7 @@ import * as yup from 'yup';
 
 import { EMAIL_REGX } from '../../utils/regex';
 import { RegistrationProps } from '../../types/register';
+import axios from 'axios';
 import styles from './RegisterForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -16,14 +17,17 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Your passwords do not match'),
 });
 
+type FormData = yup.InferType<typeof schema>;
+
 const RegisterForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegistrationProps>({ resolver: yupResolver(schema) });
+  } = useForm<FormData>({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: RegistrationProps) => {
+  const onSubmit = async (data: FormData) => {
+    const { confirmPassword, ...submitData } = data;
     console.log(data);
   };
   return (
