@@ -27,7 +27,19 @@ const RegisterForm = () => {
   } = useForm<FormData>({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...submitData } = data;
+    try {
+      await axios.post(`https://testapi.io/api/otakuneko/resource/registerUser`, submitData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      alert('Registration succesfull!');
+    } catch (err) {
+      console.error(err);
+      alert('Registration failed. Please try again.');
+    }
     console.log(data);
   };
   return (
