@@ -1,7 +1,6 @@
 import * as yup from 'yup';
 
 import { EMAIL_REGX } from '../../utils/regex';
-import { RegistrationProps } from '../../types/register';
 import axios from 'axios';
 import styles from './RegisterForm.module.scss';
 import { useForm } from 'react-hook-form';
@@ -27,14 +26,17 @@ const RegisterForm = () => {
   } = useForm<FormData>({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { confirmPassword, ...submitData } = data;
+    const { email, userName, password } = data;
     try {
-      await axios.post(`https://testapi.io/api/otakuneko/resource/registerUser`, submitData, {
-        headers: {
-          'Content-Type': 'application/json',
+      await axios.post(
+        `https://testapi.io/api/otakuneko/resource/registerUser`,
+        { email, userName, password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
-      });
+      );
       alert('Registration succesfull!');
     } catch (err) {
       console.error(err);
