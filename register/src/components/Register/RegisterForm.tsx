@@ -73,7 +73,9 @@ const RegisterForm = () => {
           {errors.confirmPassword && <p className={styles.errorMsg}>{errors.confirmPassword.message}</p>}
         </div>
 
-        <button className={styles.registerBtn}>Register</button>
+        <button className={styles.registerBtn} type="submit">
+          Register
+        </button>
       </form>
     </>
   );
