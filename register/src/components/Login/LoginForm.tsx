@@ -1,8 +1,10 @@
 import * as yup from 'yup';
 
 import { EMAIL_REGX } from '../../utils/regex';
+import { HOME_PATH } from '../../routes/consts';
 import styles from './LoginForm.module.scss';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const schema = yup.object().shape({
@@ -13,6 +15,7 @@ const schema = yup.object().shape({
 type LoginData = yup.InferType<typeof schema>;
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,6 +26,7 @@ const LoginForm = () => {
   const onSubmit = (data: LoginData) => {
     console.log(data);
     reset();
+    navigate(HOME_PATH);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
