@@ -2,6 +2,7 @@ import * as yup from 'yup';
 
 import { EMAIL_REGX } from '../../utils/regex';
 import { HOME_PATH } from '../../routes/consts';
+import axios from 'axios';
 import styles from './LoginForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -23,10 +24,25 @@ const LoginForm = () => {
     reset,
   } = useForm<LoginData>({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: LoginData) => {
-    console.log(data);
-    reset();
-    navigate(HOME_PATH);
+  const onSubmit = async (data: LoginData) => {
+    const { email, password } = data;
+
+    try {
+      await axios.post(
+        `https://testapi.io/api/otakuneko/resource/registerUser`,
+        { email, password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      reset();
+      navigate(HOME_PATH);
+    } catch (err) {
+      console.error(err);
+      alert('Login failed. Please try again.');
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
