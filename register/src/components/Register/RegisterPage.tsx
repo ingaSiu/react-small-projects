@@ -4,7 +4,7 @@ const RegisterPage = () => {
   return (
     <div>
       <h1>RegisterPage</h1>
-      <div>
+      <div style={{ margin: '10px' }}>
         <RegisterForm />
       </div>
     </div>
