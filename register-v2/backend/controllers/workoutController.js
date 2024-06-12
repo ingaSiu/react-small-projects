@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 
 // get all workouts
 const getWorkouts = async (req, res) => {
-  const workouts = await Workout.find({}).sort({ createdAt: -1 });
+  // get only user's (by logged in user) workouts by selecting user_id and finding them
+  const user_id = req.user._id;
+  const workouts = await Workout.find({ user_id }).sort({ createdAt: -1 });
 
   res.status(200).json(workouts);
 };
