@@ -14,7 +14,7 @@ connectDB();
 const app = express();
 
 // for sending body data
-app.use(express.json);
+app.use(express.json());
 // this will allow us to send form data
 app.use(express.urlencoded({ extended: true }));
 
