@@ -1,5 +1,12 @@
+import Header from './components/Header';
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <Header />
+      <h1>MERN Auth</h1>
+    </>
+  );
 };
 
 export default App;
