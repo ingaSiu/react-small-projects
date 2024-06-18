@@ -1,6 +1,7 @@
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
 import connectDB from './config/db.js';
+import cookieParser from 'cookie-parser';
 import dontenv from 'dotenv';
 import express from 'express';
 import userRoutes from './routes/userRoutes.js';
@@ -17,6 +18,8 @@ const app = express();
 app.use(express.json());
 // this will allow us to send form data
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
 
 app.use('/api/users', userRoutes);
 
