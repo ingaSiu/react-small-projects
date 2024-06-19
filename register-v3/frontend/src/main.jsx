@@ -5,6 +5,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 
 import App from './App.jsx';
 import HomeScreen from './screens/HomeScreen.jsx';
+import LoginScreen from './screens/LoginScreen.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -12,6 +13,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
+      <Route path="/login" element={<LoginScreen />} />
     </Route>,
   ),
 );
