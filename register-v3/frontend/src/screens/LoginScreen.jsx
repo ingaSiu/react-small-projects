@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import FormContainer from '../components/FormContainer';
+import Loader from '../components/Loader';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
 import { useLoginMutation } from '../slices/usersApiSlice';
@@ -60,7 +61,7 @@ const LoginScreen = () => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-
+        {isLoading && <Loader />}
         <Button type="submit" variant="primary" className="mt-3">
           Sign in
         </Button>
