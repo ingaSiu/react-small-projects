@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import FormContainer from '../components/FormContainer';
 import { setCredentials } from '../slices/authSlice';
+import { toast } from 'react-toastify';
 import { useLoginMutation } from '../slices/usersApiSlice';
 
 const LoginScreen = () => {
@@ -30,8 +31,9 @@ const LoginScreen = () => {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate('/');
+      toast.success('Succesfully logged in!');
     } catch (error) {
-      console.log(error?.data?.message || error.error);
+      toast.error(error?.data?.message || error.error);
     }
   };
   return (
