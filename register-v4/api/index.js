@@ -1,3 +1,4 @@
+import authRoutes from './routes/authRoute.js';
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -21,3 +22,5 @@ app.listen(3000, () => {
 });
 
 app.use('/api/user', userRoutes);
+
+app.use('/api/auth', authRoutes);
