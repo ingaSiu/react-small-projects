@@ -128,7 +128,7 @@ const Profile = () => {
         />
 
         <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-90 disabled:opacity-80">
-          Update
+          {loading ? 'Loading...' : 'Update'}
         </button>
       </form>
 
@@ -136,7 +136,7 @@ const Profile = () => {
         <span className="text-red-800 cursor-pointer">Delete Account</span>
         <span className="text-red-800 cursor-pointer">Sign out</span>
       </div>
-      <p className="text-red-900 mt-5">{error && 'Something went wrong'}</p>
+      {error && <p className="text-red-900 mt-5">Something went wrong</p>}
       <p className="text-green-600 mt-5">{updateSuccess && 'Successfully updated user'}</p>
     </div>
   );
