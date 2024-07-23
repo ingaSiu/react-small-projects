@@ -1,7 +1,14 @@
 /* eslint-disable no-unused-vars */
 
+import {
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  updateUserFailure,
+  updateUserStart,
+  updateUserSuccess,
+} from '../redux/user/userSlice';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
-import { updateUserFailure, updateUserStart, updateUserSuccess } from '../redux/user/userSlice';
 import { useEffect, useRef, useState } from 'react';
 
 import { app } from '../firebase';
@@ -79,6 +86,21 @@ const Profile = () => {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`api/user/delete/${currentUser._id}`, { method: 'POST' });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error));
+    }
+  };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-xl font-semibold text-center my-7">Profile</h1>
@@ -133,7 +155,9 @@ const Profile = () => {
       </form>
 
       <div className="flex justify-between mt-5">
-        <span className="text-red-800 cursor-pointer">Delete Account</span>
+        <span onClick={handleDeleteAccount} className="text-red-800 cursor-pointer">
+          Delete Account
+        </span>
         <span className="text-red-800 cursor-pointer">Sign out</span>
       </div>
       {error && <p className="text-red-900 mt-5">Something went wrong</p>}
