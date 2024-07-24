@@ -19,13 +19,15 @@ const Header = () => {
             <li>About</li>
           </Link>
 
-          <Link to="/sign-in">
-            {currentUser ? (
+          {currentUser ? (
+            <Link to="/profile">
               <img src={currentUser.profilePicture} alt="user" className="h-8 w-8 rounded-full object-cover" />
-            ) : (
+            </Link>
+          ) : (
+            <Link to="/sign-in">
               <li>Sign In</li>
-            )}
-          </Link>
+            </Link>
+          )}
         </ul>
       </div>
     </div>
