@@ -4,6 +4,7 @@ import {
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
+  signout,
   updateUserFailure,
   updateUserStart,
   updateUserSuccess,
@@ -100,6 +101,14 @@ const Profile = () => {
       dispatch(deleteUserFailure(error));
     }
   };
+  const handleSignout = async () => {
+    try {
+      await fetch('/api/auth/signout');
+      dispatch(signout());
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="p-3 max-w-lg mx-auto">
@@ -158,7 +167,9 @@ const Profile = () => {
         <span onClick={handleDeleteAccount} className="text-red-800 cursor-pointer">
           Delete Account
         </span>
-        <span className="text-red-800 cursor-pointer">Sign out</span>
+        <span onClick={handleSignout} className="text-red-800 cursor-pointer">
+          Sign out
+        </span>
       </div>
       {error && <p className="text-red-900 mt-5">Something went wrong</p>}
       <p className="text-green-600 mt-5">{updateSuccess && 'Successfully updated user'}</p>
